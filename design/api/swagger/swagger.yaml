@@ -1,9 +1,9 @@
 swagger: "2.0"
 info:
-  version: "0.0.1"
+  version: "0.0.2"
   title: Hello World App
 # during dev, should point to your local machine
-host: localhost:10010
+host: node9.codenvy.io:34596
 # basePath prefixes all resource paths 
 basePath: /
 # 
