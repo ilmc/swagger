@@ -1,9 +1,9 @@
 swagger: "2.0"
 info:
   version: "0.0.2"
-  title: Hello World App
+  title: Design First API's fdgfgf
 # during dev, should point to your local machine
-host: node9.codenvy.io:34596
+host: node8.codenvy.io:34850
 # basePath prefixes all resource paths 
 basePath: /
 # 
@@ -22,6 +22,8 @@ paths:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
     get:
+      tags:
+        - Hello
       description: Returns 'Hello' to the caller
       # used as the method name of the controller
       operationId: hello
@@ -42,6 +44,56 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /content:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: content
+    get:
+      tags:
+        - Content
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: retrieve
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags:
+        - Content
+      operationId: create
+      description: "Put me a json content package"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: a valid json file
+          schema:
+            $ref: "#/definitions/contentSchema"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -58,3 +110,17 @@ definitions:
     properties:
       message:
         type: string
+  node:
+    properties:
+      name:
+        type: object
+        items:
+          $ref: "#/definitions/contentSchema"
+  contentSchema:
+    properties:
+      children:
+        type: object
+        items:
+          $ref: "#/definitions/node"
+      
+    
