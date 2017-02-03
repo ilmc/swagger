@@ -3,7 +3,7 @@ info:
   version: "0.0.2"
   title: Design First APIs
 # during dev, should point to your local machine
-host: node8.codenvy.io:34850
+host: nlocalhost:5000
 # basePath prefixes all resource paths 
 basePath: /
 # 
