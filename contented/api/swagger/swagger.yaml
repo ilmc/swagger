@@ -1,18 +1,11 @@
 swagger: "2.0"
 info:
-  version: "0.0.2"
-  title: Design First APIs
+  version: "0.1.0"
+  title: contented
 # during dev, should point to your local machine
-host: nlocalhost:5000
+host: localhost:10010
 # basePath prefixes all resource paths 
 basePath: /
-tags:
-  - name: Hello
-    description: World example
-  - name: Assignment
-    description: Assignments for Learners
-  - name: Content
-    description: Content Mendiator
 # 
 schemes:
   # tip: remove http to make production-grade
@@ -29,8 +22,6 @@ paths:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
     get:
-      tags:
-        - Hello
       description: Returns 'Hello' to the caller
       # used as the method name of the controller
       operationId: hello
@@ -99,58 +90,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
-  /assign:
-    x-swagger-router-controller: assign
-    post:
-      tags:
-        - Assignment
-      operationId: createas
-      description: |
-        Create a New Assignment for an assignee in an organisation.
-
-        Both an assignee and the organisation are required as parametes.
-
-        The assignment can be anything as it may only be relaevent for a system which makes the assignment.
-
-        Generic assignment types may be defined that can be played via a generic assignment player.
-      parameters:
-        - name: body
-          in: body
-          required: true
-          description: Assignment details
-          schema:
-            $ref: "#/definitions/NewAssignment"
-      responses:
-        "404":
-          description: Assignment not found
-        "200":
-          description: Success
-          schema:
-            required:
-              - message
-            properties:
-              message:
-                type: string
-  /assign/{secret}:
-    x-swagger-router-controller: assign
-    get:
-      tags:
-        - Assignment
-      operationId: retrieveas
-      parameters:
-        - name: secret
-          in: path
-          required: true
-          description: The secret key to to the assignment
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            properties:
-              assignment:
-                type: object
+            $ref: "#/definitions/ErrorResponse"         
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -179,19 +119,3 @@ definitions:
         type: object
         items:
           $ref: "#/definitions/node"
-  NewAssignment:
-    type: object
-    required:
-      - assignment
-      - organisationid
-    properties:
-      assignment:
-        type: object
-      assigneeid:
-        type: string
-        default: "User1"
-      organisationid:
-        type: string
-        default: "Org1"
-      
-    

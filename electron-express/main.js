@@ -1,4 +1,4 @@
-const express = require('api-express'); //your express app
+const apiserver = require('api-server'); //your express app
 const electron = require('electron');
 
 const {app, BrowserWindow} = electron;
@@ -11,7 +11,8 @@ app.on('ready', function() {
     useContentSize: true,
     resizable: false,
   });
-  mainWindow.loadURL('http://localhost:3000/');
+  //mainWindow.loadURL('http://localhost:3000/');
+  mainWindow.loadURL('http://localhost:5000/docs');
   mainWindow.focus();
 
 });
